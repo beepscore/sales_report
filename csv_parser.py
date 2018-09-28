@@ -48,11 +48,5 @@ class CsvParser(object):
         if row is None:
             return None
         
-        # TODO: skip header row
-        
-        # TODO: Write this method body.
         row_list = row.split(',').strip()
-        week_number = row[0].strip()
-
-
-
+        return row_list
