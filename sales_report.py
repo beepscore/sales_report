@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
+from csv_parser import CsvParser
+
 
 class SalesReport:
     """
     This class holds the data returned by your generate_sales_report() method.
     """
     # TODO: Write this class body.
+
 
 def generate_sales_report(parser):
     """
@@ -34,6 +37,13 @@ def generate_sales_report(parser):
     total     568.15    180.12    513.40
     
     """
+
+
+
+
+
+
+
     report = SalesReport()
 
     # TODO: Write this method body.
@@ -41,17 +51,19 @@ def generate_sales_report(parser):
 
 
 if __name__ == '__main__':
+
     print("Test")
+
     # Your SalesReport must also contain:
     # * The total sales associated with each product over the quarter.
     # * The average weekly sales associated with each product.
     # * Products should be indexed by product name in the report.
-    
-    parser = CsvParser('foo')
-    print(parser.data)
-    
-    
-    
-pass
 
+    # sales_text contains entire csv file
+    filename = './data/sales.csv'
+    with open(filename) as f:
+        sales_text = f.read()
+
+    # print(sales_text)
+    parser = CsvParser(sales_text)
 
