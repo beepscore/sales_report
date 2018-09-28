@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+
 class SalesReport:
     '''
     This class holds the data returned by your generate_sales_report() method.

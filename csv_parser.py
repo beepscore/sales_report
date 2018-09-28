@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+
 class CsvParser(object):
     '''
     Parses lines from a CSV file, each representing 1 row,
