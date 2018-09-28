@@ -32,9 +32,7 @@ class CsvParser(object):
         # TODO: Write this method body.
         
         for row in self.data.readlines():
-            # return next row
             yield next(row)
-
 
     def next(self, row):
         """
