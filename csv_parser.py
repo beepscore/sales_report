@@ -40,9 +40,11 @@ class CsvParser(object):
         """
         Returns the next line from a CSV file, as an array, with one
         column per array element (where each element is string).
-        '0,568.15,'
-        ['0','568.15'...]
+        :row: str e.g. '0,568.15,180.12,513.40...'
+        :return: list of str e.g. ['0','568.15'...]
         """
+        # TODO: Write this method body.
+
         if row is None:
             return None
         
