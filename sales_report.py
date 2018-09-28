@@ -2,13 +2,13 @@
 
 
 class SalesReport:
-    '''
+    """
     This class holds the data returned by your generate_sales_report() method.
-    '''
+    """
     # TODO: Write this class body.
 
 def generate_sales_report(parser):
-    '''
+    """
     Tally up the sales results from the quarter.
     This method consumes a CSV file describing the quarterly sales report,
     and returns aggregate statistics about the input data.
@@ -33,7 +33,7 @@ def generate_sales_report(parser):
             Product1  Product2  Product3 ...
     total     568.15    180.12    513.40
     
-    '''
+    """
     report = SalesReport()
 
     # TODO: Write this method body.

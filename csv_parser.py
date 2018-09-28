@@ -2,15 +2,15 @@
 
 
 class CsvParser(object):
-    '''
+    """
     Parses lines from a CSV file, each representing 1 row,
     into individual columns.
-    '''
+    """
 
     def __init__(self, data):
-        '''
+        """
         Construct the CsvParser object.
-        '''
+        """
         # TODO: Write this method body.
         self.data = data
         
@@ -23,12 +23,12 @@ class CsvParser(object):
         number_of_products = len(self.product_cols)
         
     def __iter__(self):
-        '''
+        """
         Allows this object to act like an iterator
         in list comprehensions or iteration. e.g.:
           for csv_line_as_array in my_csv_parser:
               # Use the array representing that CSV record
-        '''
+        """
         # TODO: Write this method body.
         
         for row in self.data.readlines():
@@ -37,12 +37,12 @@ class CsvParser(object):
 
 
     def next(self, row):
-        '''
+        """
         Returns the next line from a CSV file, as an array, with one
         column per array element (where each element is string).
         '0,568.15,'
         ['0','568.15'...]
-        '''
+        """
         if row is None:
             return None
         
