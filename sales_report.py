@@ -145,19 +145,33 @@ def generate_sales_report(parser):
     
     """
 
-    # TODO: Write this method body.
-
     sales_report = SalesReport()
 
     total_sales_per_product = [0] * parser.number_of_products
 
-    current_record_number = 0
+    number_of_records = enumerate_parser(parser, sales_report, total_sales_per_product)
 
+    for product_index in range(parser.number_of_products):
+        sales_report.total_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index]
+        sales_report.average_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index] / number_of_records
+
+    return sales_report
+
+
+def enumerate_parser(parser, sales_report, total_sales_per_product):
+    """
+    :param parser:
+    :param sales_report:
+    :param total_sales_per_product:
+    :return: number of records processed
+    """
     # iterate through parser by date
+    number_of_records = 0
+
     for csv_line_as_array in parser:
 
         # pre-increment for use in average
-        current_record_number += 1
+        number_of_records += 1
 
         week_number_string = csv_line_as_array[0]
 
@@ -171,12 +185,7 @@ def generate_sales_report(parser):
             product_sales = sales_per_week_per_product[product_index]
             total_sales_per_product[product_index] += product_sales
 
-
-    for product_index in range(parser.number_of_products):
-        sales_report.total_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index]
-        sales_report.average_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index] / current_record_number
-
-    return sales_report
+    return number_of_records
 
 
 if __name__ == '__main__':
