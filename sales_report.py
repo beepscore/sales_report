@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from csv_parser import CsvParser
+from decimal import Decimal
 
 
 class SalesReport:
@@ -16,7 +17,13 @@ class SalesReport:
     # TODO: Write this class body.
 
     def __init__(self, ):
-        self.weekly_sales = []
+
+        # NUMBER_OF_WEEKS_IN_QUARTER = 12
+        # weekly_sums = [0] * NUMBER_OF_WEEKS_IN_QUARTER
+        # use dictionary to allow for possibility of missing weeks
+        self.total_sales_per_week = {}
+
+        self.total_sales_per_product = []
 
 
 def generate_sales_report(parser):
@@ -49,22 +56,26 @@ def generate_sales_report(parser):
 
     # TODO: Write this method body.
 
-    salesReport = SalesReport()
+    sales_report = SalesReport()
 
-    product_sums = [0] * parser.number_of_products
-    NUMBER_OF_WEEKS_IN_QUARTER = 12
-    weekly_sums = [0] * NUMBER_OF_WEEKS_IN_QUARTER
-    print(product_sums)
+    sales_report.total_sales_per_product = [0] * parser.number_of_products
 
     # iterate through parser
     for csv_line_as_array in parser:
 
-        for product_index in range(parser.number_of_products):
-            # TODO: currency, use Decimal not float
-            product_sales = float(csv_line_as_array[product_index + 1])
-            product_sums[product_index] += product_sales
+        week_number_string = csv_line_as_array[0]
 
-    report_text = str(parser.header_line) + '\n' + str(product_sums)
+        # currency, use Decimal not float
+        sales_per_week_per_product = [Decimal(x) for x in csv_line_as_array[1:]]
+
+        sales_report.total_sales_per_week[week_number_string] = sum(sales_per_week_per_product)
+
+        for product_index in range(parser.number_of_products):
+            product_sales = sales_per_week_per_product[product_index]
+            sales_report.total_sales_per_product[product_index] += product_sales
+
+    # report_text = str(parser.header_line) + '\n' + str(product_sums)
+    return sales_report
 
 
 if __name__ == '__main__':
@@ -79,6 +90,10 @@ if __name__ == '__main__':
     # print(sales_text)
     parser = CsvParser(sales_text)
 
-    generate_sales_report(parser)
+    sales_report = generate_sales_report(parser)
+
+    print(sales_report.total_sales_per_week)
+    print(sales_report.total_sales_per_product)
+
 
 
