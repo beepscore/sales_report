@@ -40,6 +40,20 @@ class SalesReport:
             text += str(f'{key: >4} {value: >11}\n')
         return text
 
+    def total_sales_per_product_report(self):
+        """
+        :return: a string e.g.
+        Product    Total Sales
+        Product1       1695.83
+        Product2        628.75
+        Product3       1498.52
+        """
+        text = 'Product    Total Sales\n'
+        for key, value in self.total_sales_per_product.items():
+            # https://docs.python.org/3/library/string.html#formatstrings
+            text += str(f'{key: >4} {value: >13}\n')
+        return text
+
 
 def generate_sales_report(parser):
     """
@@ -98,7 +112,7 @@ def generate_sales_report(parser):
 
 if __name__ == '__main__':
 
-    print("Test")
+    # print("Test")
 
     # sales_text contains entire csv file
     filename = './data/sales.csv'
@@ -112,7 +126,7 @@ if __name__ == '__main__':
 
     print(sales_report.total_sales_per_week_report())
 
-    # print(sales_report.total_sales_per_product)
+    print(sales_report.total_sales_per_product_report())
 
 
 
