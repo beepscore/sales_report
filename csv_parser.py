@@ -15,13 +15,13 @@ class CsvParser(object):
         self.data = data
 
         lines = self.data.split('\n')
-        self.header_line = lines[0]
-        self.week_lines = lines[1:]
-
-        header_cols = self.header_line.split(',')
+        header_line = lines[0]
+        header_cols = header_line.split(',')
         header_cols = [element.strip() for element in header_cols]
-        self.product_cols = header_cols[1:]
-        self.number_of_products = len(self.product_cols)
+        self.product_names = header_cols[1:]
+        self.number_of_products = len(self.product_names)
+
+        self.week_lines = lines[1:]
 
         self.week_index = 0
 

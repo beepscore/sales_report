@@ -23,7 +23,7 @@ class SalesReport:
         # use dictionary to allow for possibility of missing weeks
         self.total_sales_per_week = {}
 
-        self.total_sales_per_product = []
+        self.total_sales_per_product = {}
 
 
 def generate_sales_report(parser):
@@ -58,9 +58,9 @@ def generate_sales_report(parser):
 
     sales_report = SalesReport()
 
-    sales_report.total_sales_per_product = [0] * parser.number_of_products
+    total_sales_per_product = [0] * parser.number_of_products
 
-    # iterate through parser
+    # iterate through parser by date
     for csv_line_as_array in parser:
 
         week_number_string = csv_line_as_array[0]
@@ -70,11 +70,14 @@ def generate_sales_report(parser):
 
         sales_report.total_sales_per_week[week_number_string] = sum(sales_per_week_per_product)
 
+        # increment quarterly sums
         for product_index in range(parser.number_of_products):
             product_sales = sales_per_week_per_product[product_index]
-            sales_report.total_sales_per_product[product_index] += product_sales
+            total_sales_per_product[product_index] += product_sales
 
-    # report_text = str(parser.header_line) + '\n' + str(product_sums)
+    for product_index in range(parser.number_of_products):
+        sales_report.total_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index]
+
     return sales_report
 
 
