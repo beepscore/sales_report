@@ -25,6 +25,12 @@ class SalesReport:
 
         self.total_sales_per_product = {}
 
+    def total_sales_per_week_report(self):
+        text = 'Week Total Sales\n'
+        for key, value in self.total_sales_per_week.items():
+            text += str(f'{key} {value}\n')
+        return text
+
 
 def generate_sales_report(parser):
     """
@@ -95,8 +101,9 @@ if __name__ == '__main__':
 
     sales_report = generate_sales_report(parser)
 
-    print(sales_report.total_sales_per_week)
-    print(sales_report.total_sales_per_product)
+    print(sales_report.total_sales_per_week_report())
+
+    # print(sales_report.total_sales_per_product)
 
 
 
