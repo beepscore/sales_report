@@ -208,7 +208,3 @@ if __name__ == '__main__':
     print(sales_report.total_sales_per_product_report())
     # print(sales_report.total_sales_per_product_report_narrow_format())
     print(sales_report.average_weekly_sales_report())
-
-
-
-
