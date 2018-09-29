@@ -11,7 +11,6 @@ class CsvParser(object):
         """
         Construct the CsvParser object.
         """
-        # TODO: Write this method body.
         self.data = data
 
         lines = self.data.split('\n')
@@ -32,8 +31,6 @@ class CsvParser(object):
           for csv_line_as_array in my_csv_parser:
               # Use the array representing that CSV record
         """
-        # TODO: Write this method body.
-
         return self
 
     def __next__(self):
@@ -49,8 +46,6 @@ class CsvParser(object):
         https://stackoverflow.com/questions/19151/build-a-basic-python-iterator#24377
         https://stackoverflow.com/questions/40255096/next-in-generators-and-iterators-and-what-is-a-method-wrapper
         """
-        # TODO: Write this method body.
-
         try:
             week_line = self.week_lines[self.week_index]
             week_list = week_line.split(',')
