@@ -47,8 +47,8 @@ class SalesReport:
         """
         :return: The total sales associated with each product over the quarter
         a string e.g.
-                     Product1  Product2  Product3
-        Total Sales   1695.83    628.75   1498.52
+                       Product1  Product2  Product3
+        Total Sales     1695.83    628.75   1498.52
         """
         products = '             '
         for key in self.total_sales_per_product.keys():
@@ -82,8 +82,8 @@ class SalesReport:
         """
         :return: The average weekly sales associated with each product.
         a string e.g.
-                     Product1  Product2  Product3
-        Total Sales   1695.83    628.75   1498.52
+                       Product1  Product2  Product3
+        Average Sales    423.96    157.19    374.63
         """
         products = '             '
         for key in self.average_sales_per_product.keys():
