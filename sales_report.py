@@ -14,7 +14,6 @@ class SalesReport:
     # * Products should be indexed by product name in the report.
 
     """
-    # TODO: Write this class body.
 
     def __init__(self, ):
 
