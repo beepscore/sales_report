@@ -72,7 +72,24 @@ class SalesReport:
         for key, value in self.total_sales_per_product.items():
             # https://docs.python.org/3/library/string.html#formatstrings
             text += str(f'{key: >4} {value: >13}\n')
+
         return text
+
+    def week_with_highest_sales(self):
+        """
+        assume sales can't be negative
+        :return:
+        """
+        max_value = 0
+        week_with_max_value = None
+        for key, value in self.total_sales_per_week.items():
+            if value > max_value:
+                week_with_max_value = key
+                max_value = value
+        return week_with_max_value
+
+    def week_with_highest_sales_report(self):
+        return str(f'Week with highest sales: {self.week_with_highest_sales()}\n')
 
 
 def generate_sales_report(parser):
@@ -145,9 +162,11 @@ if __name__ == '__main__':
     sales_report = generate_sales_report(parser)
 
     print(sales_report.total_sales_per_week_report())
+    print(sales_report.week_with_highest_sales_report())
 
     print(sales_report.total_sales_per_product_report())
     # print(sales_report.total_sales_per_product_report_narrow_format())
+
 
 
 
