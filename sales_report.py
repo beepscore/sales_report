@@ -21,8 +21,10 @@ class SalesReport:
         # NUMBER_OF_WEEKS_IN_QUARTER = 12
         # weekly_sums = [0] * NUMBER_OF_WEEKS_IN_QUARTER
         # use dictionary to allow for possibility of missing weeks
+        # key is week
         self.total_sales_per_week = {}
 
+        # key is product
         self.total_sales_per_product = {}
 
     def total_sales_per_week_report(self):
@@ -41,6 +43,24 @@ class SalesReport:
         return text
 
     def total_sales_per_product_report(self):
+        """
+        :return: a string e.g.
+                     Product1  Product2  Product3
+        Total Sales   1695.83    628.75   1498.52
+        """
+        products = '           '
+        for key in self.total_sales_per_product.keys():
+            products += str(f'{key: >10}')
+        header = products
+
+        sum_line = 'Total Sales'
+        for value in self.total_sales_per_product.values():
+            # https://docs.python.org/3/library/string.html#formatstrings
+            sum_line += str(f'{value: >10}')
+
+        return header + '\n' + sum_line
+
+    def total_sales_per_product_report_narrow_format(self):
         """
         :return: a string e.g.
         Product    Total Sales
@@ -127,6 +147,7 @@ if __name__ == '__main__':
     print(sales_report.total_sales_per_week_report())
 
     print(sales_report.total_sales_per_product_report())
+    # print(sales_report.total_sales_per_product_report_narrow_format())
 
 
 
