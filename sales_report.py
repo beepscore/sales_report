@@ -26,6 +26,7 @@ class SalesReport:
 
         # key is product
         self.total_sales_per_product = {}
+        self.average_sales_per_product = {}
 
     def total_sales_per_week_report(self):
         """
@@ -44,25 +45,27 @@ class SalesReport:
 
     def total_sales_per_product_report(self):
         """
-        :return: a string e.g.
+        :return: The total sales associated with each product over the quarter
+        a string e.g.
                      Product1  Product2  Product3
         Total Sales   1695.83    628.75   1498.52
         """
-        products = '           '
+        products = '             '
         for key in self.total_sales_per_product.keys():
             products += str(f'{key: >10}')
         header = products
 
-        sum_line = 'Total Sales'
+        sum_line = 'Total Sales  '
         for value in self.total_sales_per_product.values():
             # https://docs.python.org/3/library/string.html#formatstrings
             sum_line += str(f'{value: >10}')
 
-        return header + '\n' + sum_line
+        return header + '\n' + sum_line + '\n'
 
     def total_sales_per_product_report_narrow_format(self):
         """
-        :return: a string e.g.
+        :return: The total sales associated with each product over the quarter, in narrow format
+        a string e.g.
         Product    Total Sales
         Product1       1695.83
         Product2        628.75
@@ -74,6 +77,25 @@ class SalesReport:
             text += str(f'{key: >4} {value: >13}\n')
 
         return text
+
+    def average_weekly_sales_report(self):
+        """
+        :return: The average weekly sales associated with each product.
+        a string e.g.
+                     Product1  Product2  Product3
+        Total Sales   1695.83    628.75   1498.52
+        """
+        products = '             '
+        for key in self.average_sales_per_product.keys():
+            products += str(f'{key: >10}')
+        header = products
+
+        sum_line = 'Average Sales'
+        for value in self.average_sales_per_product.values():
+            # https://docs.python.org/3/library/string.html#formatstrings
+            sum_line += str(f'{value: >10.2f}')
+
+        return header + '\n' + sum_line + '\n'
 
     def week_with_highest_sales(self):
         """
@@ -89,6 +111,9 @@ class SalesReport:
         return week_with_max_value
 
     def week_with_highest_sales_report(self):
+        """
+        :return: the week with the highest sales.
+        """
         return str(f'Week with highest sales: {self.week_with_highest_sales()}\n')
 
 
@@ -126,8 +151,13 @@ def generate_sales_report(parser):
 
     total_sales_per_product = [0] * parser.number_of_products
 
+    current_record_number = 0
+
     # iterate through parser by date
     for csv_line_as_array in parser:
+
+        # pre-increment for use in average
+        current_record_number += 1
 
         week_number_string = csv_line_as_array[0]
 
@@ -141,8 +171,10 @@ def generate_sales_report(parser):
             product_sales = sales_per_week_per_product[product_index]
             total_sales_per_product[product_index] += product_sales
 
+
     for product_index in range(parser.number_of_products):
         sales_report.total_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index]
+        sales_report.average_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index] / current_record_number
 
     return sales_report
 
@@ -166,6 +198,7 @@ if __name__ == '__main__':
 
     print(sales_report.total_sales_per_product_report())
     # print(sales_report.total_sales_per_product_report_narrow_format())
+    print(sales_report.average_weekly_sales_report())
 
 
 
