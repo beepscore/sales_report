@@ -26,6 +26,14 @@ class SalesReport:
         self.total_sales_per_product = {}
 
     def total_sales_per_week_report(self):
+        """
+        :return: a string e.g.
+        Week Total Sales
+           0     1261.67
+           1     1373.37
+           2        6.00
+          11     1182.06
+        """
         text = 'Week Total Sales\n'
         for key, value in self.total_sales_per_week.items():
             # https://docs.python.org/3/library/string.html#formatstrings
