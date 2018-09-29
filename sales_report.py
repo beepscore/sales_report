@@ -28,7 +28,8 @@ class SalesReport:
     def total_sales_per_week_report(self):
         text = 'Week Total Sales\n'
         for key, value in self.total_sales_per_week.items():
-            text += str(f'{key} {value}\n')
+            # https://docs.python.org/3/library/string.html#formatstrings
+            text += str(f'{key: >4} {value: >11}\n')
         return text
 
 
