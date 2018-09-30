@@ -5,6 +5,7 @@ import csv_parser
 import sales_report
 from decimal import Decimal
 
+
 class TestSalesReport(unittest.TestCase):
 
     def setUp(self):
@@ -23,6 +24,12 @@ class TestSalesReport(unittest.TestCase):
                     '11': Decimal('1182.06'),
                     '2': Decimal('6.00')}
         self.assertEqual(self.sales_report.total_sales_per_week, expected)
+
+    def test_total_sales_per_product(self):
+        expected = {'Product1': Decimal('1695.83'),
+                    'Product2': Decimal('628.75'),
+                    'Product3': Decimal('1498.52')}
+        self.assertEqual(self.sales_report.total_sales_per_product, expected)
 
 
 if __name__ == '__main__':
