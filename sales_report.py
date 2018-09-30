@@ -146,43 +146,44 @@ def generate_sales_report(parser):
 
     sales_report = SalesReport()
 
-    total_sales_per_product = [0] * parser.number_of_products
+    number_of_records = update_sales(parser, sales_report)
 
-    number_of_records = update_sales(parser, sales_report, total_sales_per_product)
-
-    for product_index in range(parser.number_of_products):
-        sales_report.total_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index]
-        sales_report.average_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index] / number_of_records
+    # generate average sales per product. Assumes sales_report.total_sales_per_product is up to date.
+    for product_name in parser.product_names:
+        sales_report.average_sales_per_product[product_name] = sales_report.total_sales_per_product[product_name] / number_of_records
 
     return sales_report
 
 
-def update_sales(parser, sales_report, total_sales_per_product):
+def update_sales(parser, sales_report):
     """
-    iterates parser and updates sales_report and total_sales_per_product
-    :param parser: an iterable that supplies a sequence of list.
-    :param sales_report:
-    :param total_sales_per_product:
+    iterates parser and updates sales_report
+    :param parser: an iterable that supplies a sequence, every element is a list
+                   e.g. first element ['0', '568.15', '180.12', '513.40'...]
+    :param sales_report: object to update
     :return: number of records processed, caller may use this to calculate an average
     """
+    total_sales_per_product = [0] * parser.number_of_products
     number_of_records = 0
 
     for csv_line_as_array in parser:
 
         week_number_string = csv_line_as_array[0]
 
+        # tail of csv_line_as_array converted to Decimal
         # currency, use Decimal not float
+        # e.g. [568.15, 180.12, 513.40...]
         sales_per_week_per_product = [Decimal(x) for x in csv_line_as_array[1:]]
 
+        # update total sales per week
         sales_report.total_sales_per_week[week_number_string] = sum(sales_per_week_per_product)
 
-        # increment quarterly sums
         for product_index in range(parser.number_of_products):
-            product_sales = sales_per_week_per_product[product_index]
-            total_sales_per_product[product_index] += product_sales
+            total_sales_per_product[product_index] += sales_per_week_per_product[product_index]
 
         number_of_records += 1
 
+    sales_report.total_sales_per_product = dict(zip(parser.product_names, total_sales_per_product))
     return number_of_records
 
 
