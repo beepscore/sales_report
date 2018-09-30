@@ -151,8 +151,9 @@ def generate_sales_report(parser):
     number_of_records = update_sales(parser, sales_report)
 
     # generate average sales per product. Assumes sales_report.total_sales_per_product is up to date.
-    for product_name in parser.product_names:
-        sales_report.average_sales_per_product[product_name] = sales_report.total_sales_per_product[product_name] / number_of_records
+    sales_report.average_sales_per_product =\
+        {product_name: sales_report.total_sales_per_product[product_name] / number_of_records
+         for product_name in parser.product_names}
 
     return sales_report
 
