@@ -37,6 +37,11 @@ class TestSalesReport(unittest.TestCase):
                     'Product3': Decimal('374.63')}
         self.assertEqual(self.sales_report.average_sales_per_product, expected)
 
+        expected_almost_equal = {'Product1': Decimal('423.96'),
+                                 'Product2': Decimal('157.19'),
+                                 'Product3': Decimal('374.63')}
+        self.assertAlmostEqual(self.sales_report.average_sales_per_product, expected_almost_equal)
+
 
 if __name__ == '__main__':
     unittest.main()
