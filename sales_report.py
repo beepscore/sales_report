@@ -101,15 +101,19 @@ class SalesReport:
         assume sales may be negative (e.g. customers returned items), 0, or positive
         :return: first week with maximum value
         """
-        max_value = max(self.total_sales_per_week.values())
-        week_with_max_value = None
+        # max_value = max(self.total_sales_per_week.values())
+        # week_with_max_value = None
+        #
+        # for key, value in self.total_sales_per_week.items():
+        #     if value == max_value:
+        #         week_with_max_value = key
+        #         break
 
-        for key, value in self.total_sales_per_week.items():
-            if value == max_value:
-                week_with_max_value = key
-                break
+        # key function used for the comparison returns the item[1], the item value
+        item_with_max_value = max(self.total_sales_per_week.items(), key=lambda item: item[1])
 
-        return week_with_max_value
+        # return item_with_max_value[0], the key
+        return item_with_max_value[0]
 
     def week_with_highest_sales_report(self):
         """
