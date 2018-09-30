@@ -148,7 +148,7 @@ def generate_sales_report(parser):
 
     total_sales_per_product = [0] * parser.number_of_products
 
-    number_of_records = enumerate_parser(parser, sales_report, total_sales_per_product)
+    number_of_records = update_sales(parser, sales_report, total_sales_per_product)
 
     for product_index in range(parser.number_of_products):
         sales_report.total_sales_per_product[parser.product_names[product_index]] = total_sales_per_product[product_index]
@@ -157,20 +157,17 @@ def generate_sales_report(parser):
     return sales_report
 
 
-def enumerate_parser(parser, sales_report, total_sales_per_product):
+def update_sales(parser, sales_report, total_sales_per_product):
     """
-    :param parser:
+    iterates parser and updates sales_report and total_sales_per_product
+    :param parser: an iterable that supplies a sequence of list.
     :param sales_report:
     :param total_sales_per_product:
-    :return: number of records processed
+    :return: number of records processed, caller may use this to calculate an average
     """
-    # iterate through parser by date
     number_of_records = 0
 
     for csv_line_as_array in parser:
-
-        # pre-increment for use in average
-        number_of_records += 1
 
         week_number_string = csv_line_as_array[0]
 
@@ -183,6 +180,8 @@ def enumerate_parser(parser, sales_report, total_sales_per_product):
         for product_index in range(parser.number_of_products):
             product_sales = sales_per_week_per_product[product_index]
             total_sales_per_product[product_index] += product_sales
+
+        number_of_records += 1
 
     return number_of_records
 
