@@ -37,7 +37,7 @@ class CsvParser(object):
         """
         Returns the next line from a CSV file, as an array, with one
         column per array element (where each element is string).
-        :row: str e.g. '0,568.15,180.12,513.40...'
+        example file line: '0,568.15,180.12,513.40...'
         :return: list of str e.g. ['0', '568.15', '180.12', '513.40'...]
 
         references how to implement __iter__ and __next__
