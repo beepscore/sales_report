@@ -47,6 +47,9 @@ class TestSalesReport(unittest.TestCase):
                                Decimal('374.63'),
                                delta=0.005)
 
+    def test_week_with_highest_sales(self):
+        self.assertEqual(self.sales_report.week_with_highest_sales(), '1')
+
 
 if __name__ == '__main__':
     unittest.main()
