@@ -166,7 +166,7 @@ def update_sales(parser, sales_report):
     :param sales_report: object to update
     :return: number of records processed, caller may use this to calculate an average
     """
-    total_sales_per_product = [0] * parser.number_of_products
+    cumulative_sales_per_product = [0] * parser.number_of_products
     number_of_records = 0
 
     for csv_line_as_array in parser:
@@ -181,12 +181,14 @@ def update_sales(parser, sales_report):
         # update total sales per week
         sales_report.total_sales_per_week[week_number_string] = sum(sales_per_week_per_product)
 
-        for product_index in range(parser.number_of_products):
-            total_sales_per_product[product_index] += sales_per_week_per_product[product_index]
+        # accumulate sales per product
+        # prefer method enumerate(x) over range(len(x))
+        for product_index, product_name in enumerate(parser.product_names):
+            cumulative_sales_per_product[product_index] += sales_per_week_per_product[product_index]
 
         number_of_records += 1
 
-    sales_report.total_sales_per_product = dict(zip(parser.product_names, total_sales_per_product))
+    sales_report.total_sales_per_product = dict(zip(parser.product_names, cumulative_sales_per_product))
     return number_of_records
 
 
