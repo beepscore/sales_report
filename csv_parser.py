@@ -40,7 +40,11 @@ class CsvParser(object):
         :row: str e.g. '0,568.15,180.12,513.40...'
         :return: list of str e.g. ['0', '568.15', '180.12', '513.40'...]
 
-        I needed to research how to implement __iter__ and __next__
+        references how to implement __iter__ and __next__
+
+        Loop like a native: while, for, iterators, generators by Ned Batchelder
+        https://www.youtube.com/watch?v=EnSu9hHGq5o
+
         https://stackoverflow.com/questions/4019971/how-to-implement-iter-self-for-a-container-object-python#4019987
         https://docs.python.org/3/tutorial/classes.html#generators
         https://stackoverflow.com/questions/19151/build-a-basic-python-iterator#24377
