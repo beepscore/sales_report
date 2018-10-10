@@ -52,25 +52,22 @@ def total_sales_per_week(df):
     return week_sums_df
 
 
-def total_sales_per_product(df):
+def total_sales_per_product_per_quarter(df):
     """
-    :return: a dataframe with total sales associated with each product over the quarter e.g.
+    :return: a series with total sales associated with each product over the quarter e.g.
 
-    Product    Total Sales
-    Product1       1695.83
-    Product2        628.75
-    Product3       1498.52
+    Product1    1695.83
+    Product2     628.75
+    Product3    1498.52
+    dtype: float64
     """
     product_columns_df = df.iloc[:, 1:]
-
-    # product_column_sums is a series
     product_column_sums = product_columns_df.sum()
-    product_column_sums_df = pd.DataFrame(product_column_sums, columns=['total'])
 
-    return product_column_sums_df
+    return product_column_sums
 
 
-def average_weekly_sales(df):
+def average_sales_per_product_per_week(df):
     """
     :return: a dataframe with average weekly sales associated with each product e.g.
 
@@ -106,7 +103,7 @@ def week_with_highest_sales(df):
 
     week_sums_max_row = week_sums_df.loc[index_total_max]
 
-    return week_sums_max_row
+    return week_sums_max_row[0]
 
 
 if __name__ == '__main__':
@@ -128,8 +125,8 @@ if __name__ == '__main__':
     print()
     print('total_sales_per_week', '\n', total_sales_per_week(df))
     print()
-    print('total_sales_per_product', '\n', total_sales_per_product(df))
+    print('total_sales_per_product_per_quarter', '\n', total_sales_per_product_per_quarter(df))
     print()
-    print('average_weekly_sales', '\n', average_weekly_sales(df))
+    print('average_sales_per_product_per_week', '\n', average_sales_per_product_per_week(df))
     print()
     print('week_with_highest_sales', '\n', week_with_highest_sales(df))
