@@ -35,16 +35,16 @@ class TestSalesPandas(unittest.TestCase):
         self.assertEqual(actual_week_11_total, 1182.06)
 
     def test_total_sales_per_product(self):
-        expected = pd.Series({'Product1': 1695.83,
-                              'Product2': 628.75,
-                              'Product3': 1498.52})
+        expected = pd.Series({'Product1': Decimal('1695.83'),
+                              'Product2': Decimal('628.75'),
+                              'Product3': Decimal('1498.52')})
+
         actual = sales_pandas.total_sales_per_product(self.df)
         self.assertEqual(type(actual), pd.Series)
         self.assertEqual(actual.name, 'total_sales_per_product')
         self.assertTrue(actual.equals(expected))
 
-        # don't use Decimal here because total_sales_per_product doesn't maintain decimal
-        self.assertEqual(type(actual['Product3']), np.float64)
+        self.assertEqual(type(actual['Product3']), Decimal)
 
     def test_average_sales_per_product_per_week(self):
         # don't use Decimal here because average_sales_per_product_per_week doesn't maintain decimal

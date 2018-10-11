@@ -75,10 +75,15 @@ def total_sales_per_product(df):
     Product1    1695.83
     Product2     628.75
     Product3    1498.52
-    Name: total_sales_per_product, dtype: float64
+    Name: total_sales_per_product, dtype: object
     """
     product_columns_df = df.iloc[:, 1:]
-    product_column_sums = product_columns_df.sum()
+
+    # sum() is vectorized and fast but doesn't preserve type object (Decimal)
+    # product_column_sums = product_columns_df.sum()
+    # apply() may be slower than sum() but preserves type object (Decimal)
+    product_column_sums = product_columns_df.apply(lambda x: x.sum())
+
     product_column_sums.name = 'total_sales_per_product'
 
     return product_column_sums
