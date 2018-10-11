@@ -23,7 +23,14 @@ class TestSalesReport(unittest.TestCase):
                     '1': Decimal('1373.37'),
                     '11': Decimal('1182.06'),
                     '2': Decimal('6.00')}
-        self.assertEqual(self.sales_report.total_sales_per_week, expected)
+
+        actual = self.sales_report.total_sales_per_week
+        self.assertEqual(actual, expected)
+
+        # total_sales_per_week maintains Decimal
+        actual_week_11_total = actual['11']
+        self.assertEqual(type(actual_week_11_total), Decimal)
+        self.assertEqual(actual_week_11_total, Decimal('1182.06'))
 
     def test_total_sales_per_product(self):
         expected = {'Product1': Decimal('1695.83'),
