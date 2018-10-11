@@ -2,6 +2,7 @@
 
 import pandas as pd
 from decimal import Decimal
+import numpy as np
 
 """
 Use pandas to read csv, parse values, generate reports.
@@ -56,10 +57,11 @@ def total_sales_per_week(df):
     # Product2 object
     # Product3 object
 
-    # apparently sum() doesn't preserve type Decimal.
-    week_sums = product_columns_df.sum(axis=1)
-    # print('week_sums.dtypes', '\n', week_sums.dtypes)
-    # float64
+    # sum() is vectorized and fast but doesn't preserve type object (Decimal), changes to float64
+    # week_sums = product_columns_df.sum(axis=1)
+    # apply() may be slower than sum() but preserves type object (Decimal)
+    week_sums = product_columns_df.apply(lambda x: x.sum(), axis=1)
+
     week_sums.name = 'total'
 
     week_sums_df = pd.concat([df['Week'], week_sums], axis=1)
@@ -79,7 +81,7 @@ def total_sales_per_product(df):
     """
     product_columns_df = df.iloc[:, 1:]
 
-    # sum() is vectorized and fast but doesn't preserve type object (Decimal)
+    # sum() is vectorized and fast but doesn't preserve type object (Decimal), changes to float64
     # product_column_sums = product_columns_df.sum()
     # apply() may be slower than sum() but preserves type object (Decimal)
     product_column_sums = product_columns_df.apply(lambda x: x.sum())
@@ -118,6 +120,9 @@ def week_with_highest_sales(df):
     Name: 1, dtype: float64
     """
     week_sums_df = total_sales_per_week(df)
+
+    # idxmax() doesn't work with type object Decimal, so convert Decimal to numpy float64
+    week_sums_df['total'] = week_sums_df['total'].astype(np.float64)
 
     # https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.idxmax.html
     index_total_max = week_sums_df['total'].idxmax()

@@ -4,7 +4,6 @@ import unittest
 import pandas as pd
 import sales_pandas
 from decimal import Decimal
-import numpy as np
 
 
 class TestSalesPandas(unittest.TestCase):
@@ -15,11 +14,8 @@ class TestSalesPandas(unittest.TestCase):
         self.df = sales_pandas.df_from_file(filename)
 
     def test_total_sales_per_week(self):
-        # don't use Decimal here because total_sales_per_week doesn't maintain decimal
-        # d = {'Week': [0, 1, 2, 11],
-        #     'total': [Decimal('1261.67'), Decimal('1373.37'), Decimal('6.00'), Decimal('1182.06')]}
         d = {'Week': [0, 1, 2, 11],
-             'total': [1261.67, 1373.37, 6.00, 1182.06]}
+             'total': [Decimal('1261.67'), Decimal('1373.37'), Decimal('6.00'), Decimal('1182.06')]}
         expected = pd.DataFrame(data=d)
         # print('expected', '\n', expected)
 
@@ -29,10 +25,9 @@ class TestSalesPandas(unittest.TestCase):
         self.assertEqual(type(actual), pd.DataFrame)
         self.assertTrue(actual.equals(expected))
 
-        # item() returns float not float64
         actual_week_11_total = actual.loc[actual['Week'] == 11, 'total'].item()
-        self.assertEqual(type(actual_week_11_total), float)
-        self.assertEqual(actual_week_11_total, 1182.06)
+        self.assertEqual(type(actual_week_11_total), Decimal)
+        self.assertEqual(actual_week_11_total, Decimal('1182.06'))
 
     def test_total_sales_per_product(self):
         expected = pd.Series({'Product1': Decimal('1695.83'),
