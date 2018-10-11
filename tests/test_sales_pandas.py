@@ -26,12 +26,12 @@ class TestSalesPandas(unittest.TestCase):
         actual = sales_pandas.total_sales_per_week(self.df)
         # print('actual', '\n', actual)
 
-        self.assertTrue(type(actual) is pd.DataFrame)
+        self.assertEqual(type(actual), pd.DataFrame)
         self.assertTrue(actual.equals(expected))
 
         # item() returns float not float64
         actual_week_11_total = actual.loc[actual['Week'] == 11, 'total'].item()
-        self.assertTrue(type(actual_week_11_total) is float)
+        self.assertEqual(type(actual_week_11_total), float)
         self.assertEqual(actual_week_11_total, 1182.06)
 
     def test_total_sales_per_product(self):
@@ -39,7 +39,7 @@ class TestSalesPandas(unittest.TestCase):
                               'Product2': 628.75,
                               'Product3': 1498.52})
         actual = sales_pandas.total_sales_per_product(self.df)
-        self.assertTrue(type(actual) is pd.Series)
+        self.assertEqual(type(actual), pd.Series)
         self.assertTrue(actual.equals(expected))
 
     def test_average_sales_per_product_per_week(self):
