@@ -75,6 +75,7 @@ def total_sales_per_product(df):
     """
     product_columns_df = df.iloc[:, 1:]
     product_column_sums = product_columns_df.sum()
+    product_column_sums.name = 'total_sales_per_product'
 
     return product_column_sums
 

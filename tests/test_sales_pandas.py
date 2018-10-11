@@ -40,6 +40,7 @@ class TestSalesPandas(unittest.TestCase):
                               'Product3': 1498.52})
         actual = sales_pandas.total_sales_per_product(self.df)
         self.assertEqual(type(actual), pd.Series)
+        self.assertEqual(actual.name, 'total_sales_per_product')
         self.assertTrue(actual.equals(expected))
 
     def test_average_sales_per_product_per_week(self):
