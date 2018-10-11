@@ -12,7 +12,7 @@ This is an alternative solution to csv_parser.py and sales_report.py
 def decimal_from_value(value):
     """
     Can use decimal for greater accuracy with currency.
-    Apparently pandas methods like sum() and average() don't preserve type Decimal.
+    Apparently pandas methods like sum() and mean() don't preserve type Decimal.
     In the current example using Decimal in Pandas may not be worth the effort.
     """
     return Decimal(value)
