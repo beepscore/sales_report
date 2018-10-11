@@ -55,6 +55,9 @@ class TestSalesPandas(unittest.TestCase):
         actual = sales_pandas.average_sales_per_product_per_week(self.df)
         print('actual', '\n', actual)
 
+        self.assertEqual(type(actual), pd.DataFrame)
+        self.assertEqual(actual.name, 'average_sales_per_product_per_week')
+
         # assertEqual doesn't work, ValueError: The truth value of a DataFrame is ambiguous.
         # self.assertEqual(actual, expected)
         # pandas.DataFrame.equals works

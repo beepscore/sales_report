@@ -94,6 +94,7 @@ def average_sales_per_product_per_week(df):
     # product_column_averages is a series
     product_column_averages = product_columns_df.mean()
     product_column_averages_df = pd.DataFrame(product_column_averages, columns=['average'])
+    product_column_averages_df.name = 'average_sales_per_product_per_week'
 
     return product_column_averages_df
 
