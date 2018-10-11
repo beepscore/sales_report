@@ -57,9 +57,10 @@ def total_sales_per_week(df):
     week_sums = product_columns_df.sum(axis=1)
     # print('week_sums.dtypes', '\n', week_sums.dtypes)
     # float64
-
     week_sums.name = 'total'
+
     week_sums_df = pd.concat([df['Week'], week_sums], axis=1)
+    week_sums_df.name = 'total_sales_per_week'
 
     return week_sums_df
 
@@ -139,7 +140,7 @@ if __name__ == '__main__':
     print()
     print('total_sales_per_week', '\n', total_sales_per_week(df))
     print()
-    print('total_sales_per_product', '\n', total_sales_per_product(df))
+    print(total_sales_per_product(df))
     print()
     print('average_sales_per_product_per_week', '\n', average_sales_per_product_per_week(df))
     print()
