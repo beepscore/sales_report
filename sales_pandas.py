@@ -43,9 +43,21 @@ def total_sales_per_week(df):
     2     2     6.00
     3    11  1182.06
     """
+    # drop column 0 Week
     product_columns_df = df.iloc[:, 1:]
 
+    # product_columns_df contains Decimal
+    # print('product_columns_df.dtypes', '\n', product_columns_df.dtypes)
+    # Product1 object
+    # Product2 object
+    # Product3 object
+
+    # apparently sum() doesn't preserve type Decimal.
+    # In the current example using Decimal in Pandas may not be worth the effort.
     week_sums = product_columns_df.sum(axis=1)
+    # print('week_sums.dtypes', '\n', week_sums.dtypes)
+    # float64
+
     week_sums.name = 'total'
     week_sums_df = pd.concat([df['Week'], week_sums], axis=1)
 
