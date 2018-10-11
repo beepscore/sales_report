@@ -29,23 +29,26 @@ class TestSalesReport(unittest.TestCase):
         expected = {'Product1': Decimal('1695.83'),
                     'Product2': Decimal('628.75'),
                     'Product3': Decimal('1498.52')}
-        self.assertEqual(self.sales_report.total_sales_per_product, expected)
+        actual = self.sales_report.total_sales_per_product
+        self.assertEqual(actual, expected)
+
+        # total_sales_per_product maintains Decimal
+        self.assertEqual(type(actual['Product1']), Decimal)
 
     def test_average_sales_per_product(self):
         expected = {'Product1': Decimal('423.9575'),
                     'Product2': Decimal('157.1875'),
                     'Product3': Decimal('374.63')}
-        self.assertEqual(self.sales_report.average_sales_per_product, expected)
 
-        self.assertAlmostEqual(self.sales_report.average_sales_per_product['Product1'],
-                               Decimal('423.96'),
-                               delta=0.005)
-        self.assertAlmostEqual(self.sales_report.average_sales_per_product['Product2'],
-                               Decimal('157.19'),
-                               delta=0.005)
-        self.assertAlmostEqual(self.sales_report.average_sales_per_product['Product3'],
-                               Decimal('374.63'),
-                               delta=0.005)
+        actual = self.sales_report.average_sales_per_product
+        self.assertEqual(actual, expected)
+
+        self.assertAlmostEqual(actual['Product1'], Decimal('423.96'), delta=0.005)
+        self.assertAlmostEqual(actual['Product2'], Decimal('157.19'), delta=0.005)
+        self.assertAlmostEqual(actual['Product3'], Decimal('374.63'), delta=0.005)
+
+        # average_sales_per_product maintains Decimal
+        self.assertEqual(type(actual['Product1']), Decimal)
 
     def test_week_with_highest_sales(self):
         self.assertEqual(self.sales_report.week_with_highest_sales(), '1')
