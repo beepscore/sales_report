@@ -9,9 +9,9 @@ from decimal import Decimal
 class TestSalesReport(unittest.TestCase):
 
     def setUp(self):
-        # sales_text contains entire csv file
         filename = '../data/sales.csv'
         with open(filename) as f:
+            # sales_text contains entire csv file
             sales_text = f.read()
 
         parser = csv_parser.CsvParser(sales_text)

@@ -9,8 +9,8 @@ from decimal import Decimal
 class TestSalesPandas(unittest.TestCase):
 
     def setUp(self):
-        # sales_text contains entire csv file
         filename = '../data/sales.csv'
+        # df contains entire csv file
         self.df = sales_pandas.df_from_file(filename)
 
     def test_total_sales_per_week(self):
