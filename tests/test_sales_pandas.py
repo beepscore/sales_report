@@ -48,10 +48,10 @@ class TestSalesPandas(unittest.TestCase):
         data = [423.9575, 157.1875, 374.63]
         index = ['Product1', 'Product2', 'Product3']
         expected = pd.DataFrame(data=data, index=index, columns=['average'])
-        print('expected', '\n', expected)
+        # print('expected', '\n', expected)
 
         actual = sales_pandas.average_sales_per_product_per_week(self.df)
-        print('actual', '\n', actual)
+        # print('actual', '\n', actual)
 
         self.assertEqual(type(actual), pd.DataFrame)
         self.assertEqual(actual.name, 'average_sales_per_product_per_week')
