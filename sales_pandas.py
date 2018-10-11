@@ -9,8 +9,12 @@ This is an alternative solution to csv_parser.py and sales_report.py
 """
 
 
-# currency use decimal for greater accuracy
 def decimal_from_value(value):
+    """
+    Can use decimal for greater accuracy with currency.
+    Apparently pandas methods like sum() and average() don't preserve type Decimal.
+    In the current example using Decimal in Pandas may not be worth the effort.
+    """
     return Decimal(value)
 
 
@@ -53,7 +57,6 @@ def total_sales_per_week(df):
     # Product3 object
 
     # apparently sum() doesn't preserve type Decimal.
-    # In the current example using Decimal in Pandas may not be worth the effort.
     week_sums = product_columns_df.sum(axis=1)
     # print('week_sums.dtypes', '\n', week_sums.dtypes)
     # float64
@@ -72,7 +75,7 @@ def total_sales_per_product(df):
     Product1    1695.83
     Product2     628.75
     Product3    1498.52
-    dtype: float64
+    Name: total_sales_per_product, dtype: float64
     """
     product_columns_df = df.iloc[:, 1:]
     product_column_sums = product_columns_df.sum()
