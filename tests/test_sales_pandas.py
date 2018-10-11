@@ -34,11 +34,11 @@ class TestSalesPandas(unittest.TestCase):
         self.assertTrue(type(actual_week_11_total) is float)
         self.assertEqual(actual_week_11_total, 1182.06)
 
-    def test_total_sales_per_product_per_quarter(self):
+    def test_total_sales_per_product(self):
         expected = pd.Series({'Product1': 1695.83,
                               'Product2': 628.75,
                               'Product3': 1498.52})
-        actual = sales_pandas.total_sales_per_product_per_quarter(self.df)
+        actual = sales_pandas.total_sales_per_product(self.df)
         self.assertTrue(type(actual) is pd.Series)
         self.assertTrue(actual.equals(expected))
 

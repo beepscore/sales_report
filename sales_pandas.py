@@ -52,9 +52,9 @@ def total_sales_per_week(df):
     return week_sums_df
 
 
-def total_sales_per_product_per_quarter(df):
+def total_sales_per_product(df):
     """
-    :return: a series with total sales associated with each product over the quarter e.g.
+    :return: a series with total sales associated with each product over all rows e.g.
 
     Product1    1695.83
     Product2     628.75
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     print()
     print('total_sales_per_week', '\n', total_sales_per_week(df))
     print()
-    print('total_sales_per_product_per_quarter', '\n', total_sales_per_product_per_quarter(df))
+    print('total_sales_per_product', '\n', total_sales_per_product(df))
     print()
     print('average_sales_per_product_per_week', '\n', average_sales_per_product_per_week(df))
     print()
