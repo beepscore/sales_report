@@ -4,7 +4,7 @@ import unittest
 import pandas as pd
 import sales_pandas
 from decimal import Decimal
-# import numpy as np
+import numpy as np
 
 
 class TestSalesPandas(unittest.TestCase):
@@ -42,6 +42,9 @@ class TestSalesPandas(unittest.TestCase):
         self.assertEqual(type(actual), pd.Series)
         self.assertEqual(actual.name, 'total_sales_per_product')
         self.assertTrue(actual.equals(expected))
+
+        # don't use Decimal here because total_sales_per_product doesn't maintain decimal
+        self.assertEqual(type(actual['Product3']), np.float64)
 
     def test_average_sales_per_product_per_week(self):
         # don't use Decimal here because average_sales_per_product_per_week doesn't maintain decimal
