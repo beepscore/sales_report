@@ -1,3 +1,4 @@
 {
-    "python.unitTest.cwd": "./tests"
+    "python.unitTest.cwd": "./tests",
+    "python.unitTest.unittestEnabled": true
 }
