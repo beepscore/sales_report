@@ -1,2 +1,4 @@
 {
+    "python.pythonPath": "/Users/stevebaker/anaconda/envs/beepscore/bin/python",
+    "python.unitTest.unittestEnabled": true,
 }

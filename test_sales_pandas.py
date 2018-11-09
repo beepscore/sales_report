@@ -9,7 +9,7 @@ from decimal import Decimal
 class TestSalesPandas(unittest.TestCase):
 
     def setUp(self):
-        filename = '../data/sales.csv'
+        filename = './data/sales.csv'
         # df contains entire csv file
         self.df = sales_pandas.df_from_file(filename)
 
