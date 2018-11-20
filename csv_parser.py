@@ -26,10 +26,16 @@ class CsvParser(object):
 
     def __iter__(self):
         """
-        Allows this object to act like an iterator
+        __iter__ allows this object to act like an iterator
         in list comprehensions or iteration. e.g.:
+
           for csv_line_as_array in my_csv_parser:
               # Use the array representing that CSV record
+
+        Define an __iter__() method which returns an object with a __next__() method.
+        If the class defines __next__(), then __iter__() can just return self
+        Reference 'The Python Tutorial' section 9.8 Iterators
+        https://docs.python.org/3/tutorial/classes.html#iterators
         """
         return self
 
