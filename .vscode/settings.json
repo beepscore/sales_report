@@ -1,4 +1,5 @@
 {
-    "python.pythonPath": "/Users/stevebaker/anaconda/envs/beepscore/bin/python",
+    "python.pythonPath": "/Users/stevebaker/anaconda3/envs/beepscore36/bin/python",
     "python.unitTest.unittestEnabled": true,
+    "python.condaPath": "/Users/stevebaker/anaconda3/envs/beepscore36/bin/python",
 }
